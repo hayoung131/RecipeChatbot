@@ -1,7 +1,5 @@
 
-This is a toy Chatbot written in Python 3.5 with a MySQL database backend.
-
-The code is mainly based on this blog-post: http://rodic.fr/blog/python-chatbot-1/  
+This is a toy Chatbot written in Python 3.5 with a MySQL database backend.  The code is mainly based on this blog-post: http://rodic.fr/blog/python-chatbot-1/  
 
 The logic is very simple - the ChatBot stores bag-of-word associations for responses to a previous sentence and uses this to try to match future responses. 
 
@@ -31,8 +29,9 @@ This is not aimed at any real practical task, it is just a framework for experim
 
 Within source-code working directory, create the following sub-directories:
 
-`./config` 		
-`./dump`    	
+`./config`  
+`./dump`  
+
 
 
 **config file**
@@ -65,12 +64,12 @@ GRANT CREATE TEMPORARY TABLES  on simplebot.*
    TO 'simplebot'@'localhost';
 ``` 
 
-The username must match the user set in the ChatBot config.ini file.  
+The user-name must match the user configured in the ChatBot `config.ini` file.  
 
-Replace localhost with the remote host that the ChatBot will be accessing the mySQL database *from*.
+Replace `localhost` with the remote host that the ChatBot will be accessing the mySQL database *from*.
 
 
-Set an appropriate password; this will need to be initialised (stored locally in encoded form) for the ChatBot later on. 
+Set an appropriate password; this will need to be initialised (stored locally in encoded form) for the ChatBot later on (see the next section of this README). 
 
 
 **Initialisation of Database Password for ChatBot**
@@ -173,8 +172,8 @@ Bot> OK, moving on...
 Bot> Sorry I don't know what to say
 Bot> Please can you train me - enter a response for me to learn (Enter to Skip)
 >>> A cat is a furry animal that chases mice
->>> Bot> Thanks I've noted that
->>> Bot> How are you?
+Bot> Thanks I've noted that
+Bot> How are you?
 >>> Very well thanks
 Bot> That is great to hear
 >>> quit
