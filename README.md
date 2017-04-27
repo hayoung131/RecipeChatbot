@@ -1,5 +1,5 @@
 
-This is a toy Chatbot written in Python 3.5 with a MySQL database backend.  The code is mainly based on this blog-post: http://rodic.fr/blog/python-chatbot-1/  
+This is a toy Chatbot written in **Python 3.5** with a MySQL database backend.  The code is mainly based on this blog-post: http://rodic.fr/blog/python-chatbot-1/  
 
 The logic is very simple - the ChatBot stores bag-of-word associations for responses to a previous sentence and uses this to try to match future responses. 
 
@@ -138,11 +138,49 @@ Done.
 
 ## Run the ChatBot ##
 
+#### Local Single-User Chatbot ####
 The ChatBot can be started in single-user mode as follows:
 
 ```
  python chatbot.py
 ```
+
+#### Multi-Threaded Client-Server ChatBot ####
+
+The chatbot can be started with a multi-threaded server scheduler (`botserver.py`) that listens for connections on a TCP port.  This is a very simple "bare-bones" multi session framework with no authentication and just relying on TCP sockets for connection.
+
+Remote TCP Socket Connection requests are given a thread and their own session connection.  
+
+The botserver gives each session a connection to the shared database server.  
+
+**Start the server**
+
+Before starting the server, check the section in the `./config/config.ini` file for configuring the server, EG:
+
+```
+[Server]
+listen_host: 0.0.0.0
+tcp_socket: 9999
+listen_queue: 10
+```
+
+The default settings are fine for most cases.  To start the server run  
+
+`nohup python3.5 botserver.py & `
+
+
+**Connect a remote client**
+
+To connect a remote client, make sure the port the server is listening to is allowed through the firewall (or use SSH tunneling).
+
+Copy the `simpleclient.py` file to the remote client host.  
+
+Start the client by running:  
+   
+```python simpleclient.py -a 192.168.0.99 -p 9999```  
+(where the ChatBot Server host IP address or host-alias is supplied for the "-a" arg and ChatBot Server Port is supplied for the -p arg)
+
+
 
 
 ## A Sample Conversation with SimpleBot ##
